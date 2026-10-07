@@ -65,6 +65,9 @@ Bean & Brew is a modern coffee shop website where users can view the coffee menu
 - Created the coffee menu and contact form
 - Added photos
 
+## Link to the Web site
+https://khanziik.github.io/webmidcoffee/web1midterm/index.html
+
 
 ## Project Structure
 
