@@ -9,7 +9,7 @@ Bean & Brew is a responsive multi-page coffee shop website.
 - Yerkezhan Vassenzhan
 - Suleimen Khanzere
 - Aikyn Sabit
-
+## LINK OF THE PAGE: https://khanziik.github.io/webmidcoffee/
 ## Description
 
 Bean & Brew is a modern coffee shop website where users can view the coffee menu, learn about the coffee shop, see the gallery and contact the coffee shop.
