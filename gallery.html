@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gallery - Bean & Brew</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="vendor/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="endterm.css">
+
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-container">
+
+        <a href="index.html" class="logo">
+            Bean<span>&</span>Brew
+        </a>
+
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="menu.html">Menu</a>
+            <a href="gallery.html" class="active">Gallery</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+    </div>
+</header>
+
+
+<main>
+
+    <section class="page-banner">
+        <div class="container text-center">
+
+            <span class="small-title">OUR GALLERY</span>
+
+            <h1>Inside Bean & Brew</h1>
+
+            <p>
+                Take a look at our coffee, desserts and cozy atmosphere.
+            </p>
+
+        </div>
+    </section>
+
+
+    <section class="section">
+
+        <div class="container">
+
+            <div class="gallery-grid d-grid">
+
+                <div class="gallery-item">
+                    <img
+                        src="images/cappuccino.jpg"
+                        alt="Coffee cup"
+                        loading="lazy"
+                    >
+                    <div class="gallery-caption">
+                        <span>Fresh Cappuccino</span>
+                    </div>
+                    <button type="button" class="open-photo" aria-label="Enlarge Fresh Cappuccino"></button>
+                </div>
+
+
+                <div class="gallery-item">
+                    <img
+                        src="images/ice-latte.jpg"
+                        alt="Latte"
+                        loading="lazy"
+                    >
+                    <div class="gallery-caption">
+                        <span>Ice Latte</span>
+                    </div>
+                    <button type="button" class="open-photo" aria-label="Enlarge Ice Latte"></button>
+                </div>
+
+
+                <div class="gallery-item">
+                    <img
+                        src="images/mocha.jpg"
+                        alt="Mocha"
+                        loading="lazy"
+                    >
+                    <div class="gallery-caption">
+                        <span>Mocha</span>
+                    </div>
+                    <button type="button" class="open-photo" aria-label="Enlarge Mocha"></button>
+                </div>
+
+
+                <div class="gallery-item">
+                    <img
+                        src="images/interior.jpg"
+                        alt="Coffee shop interior"
+                        loading="lazy"
+                    >
+                    <div class="gallery-caption">
+                        <span>Our Interior</span>
+                    </div>
+                    <button type="button" class="open-photo" aria-label="Enlarge Our Interior"></button>
+                </div>
+
+
+                <div class="gallery-item">
+                    <img
+                        src="images/beans.jpg"
+                        alt="Coffee beans"
+                        loading="lazy"
+                    >
+                    <div class="gallery-caption">
+                        <span>Fresh Beans</span>
+                    </div>
+                    <button type="button" class="open-photo" aria-label="Enlarge Fresh Beans"></button>
+                </div>
+
+
+                <div class="gallery-item">
+                    <img
+                        src="images/croissant.jpg"
+                        alt="Dessert"
+                        loading="lazy"
+                    >
+                    <div class="gallery-caption">
+                        <span>Sweet Dessert</span>
+                    </div>
+                    <button type="button" class="open-photo" aria-label="Enlarge Sweet Dessert"></button>
+                </div>
+
+
+                <div class="gallery-item">
+                    <img
+                        src="images/khanzere.jpg"
+                        alt="Barista"
+                        loading="lazy"
+                    >
+                    <div class="gallery-caption">
+                        <span>Our Barista</span>
+                    </div>
+                    <button type="button" class="open-photo" aria-label="Enlarge Our Barista"></button>
+                </div>
+
+
+                <div class="gallery-item">
+                    <img
+                        src="images/morning-coffee.jpg"
+                        alt="Coffee"
+                        loading="lazy"
+                    >
+                    <div class="gallery-caption">
+                        <span>Morning Coffee</span>
+                    </div>
+                    <button type="button" class="open-photo" aria-label="Enlarge Morning Coffee"></button>
+                </div>
+
+
+                <div class="gallery-item">
+                    <img
+                        src="images/corner.jpg"
+                        alt="Coffee shop"
+                        loading="lazy"
+                    >
+                    <div class="gallery-caption">
+                        <span>Cozy Corner</span>
+                    </div>
+                    <button type="button" class="open-photo" aria-label="Enlarge Cozy Corner"></button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <dialog id="lightbox" aria-label="Gallery photo">
+        <div class="photo-panel">
+            <div class="photo-tools">
+                <button type="button" id="close-photo" aria-label="Close photo">Close</button>
+            </div>
+            <img id="full-photo" alt="">
+            <div class="photo-tools">
+                <button type="button" id="previous-photo" aria-label="Previous photo"> < </button>
+                <span id="photo-caption" role="status"></span>
+                <button type="button" id="next-photo" aria-label="Next photo"> > </button>
+            </div>
+        </div>
+    </dialog>
+
+</main>
+
+
+<footer class="site-footer">
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-12 col-md-4">
+                <h3>Bean & Brew</h3>
+                <p>Fresh coffee and good moments every day.</p>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <h3>Contact</h3>
+                <p>Astana, Kazakhstan</p>
+                <p>+7 700 123 45 67</p>
+                <p>aikocoffee@beanbrew.com</p>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <span>Instagram</span>
+                    <span>TikTok</span>
+                    <span>Facebook</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Bean & Brew Coffee Shop. All rights reserved.</p>
+        </div>
+
+    </div>
+</footer>
+
+<script src="vendor/jquery-3.7.1.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
