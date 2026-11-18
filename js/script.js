@@ -1,4 +1,4 @@
-/* Bean & Brew — client-side endterm features. */
+
 $(function () {
     const byId = id => document.getElementById(id);
     const categories = ['Coffee', 'Desserts'];
@@ -310,3 +310,197 @@ $(function () {
     if (byId('menu-search')) initMenu();
     if (byId('lightbox')) initGallery(byId('lightbox'));
 });
+
+
+(function () {
+    const themeKey = 'bean-brew.theme';
+    const accountKey = 'bean-brew.account';
+
+    function initTheme() {
+        let savedTheme = null;
+        try {
+            savedTheme = localStorage.getItem(themeKey);
+        } catch (error) {
+            savedTheme = null;
+        }
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme === 'dark' || (!savedTheme && prefersDark) ? 'dark' : 'light';
+        document.body.classList.toggle('dark-theme', theme === 'dark');
+        const button = document.getElementById('theme-toggle');
+        if (!button) return;
+        function updateButton() {
+            const dark = document.body.classList.contains('dark-theme');
+            button.textContent = dark ? '☀️ Light mode' : '🌙 Dark mode';
+            button.setAttribute('aria-pressed', String(dark));
+        }
+        updateButton();
+        button.addEventListener('click', function () {
+            const dark = document.body.classList.toggle('dark-theme');
+            try {
+                localStorage.setItem(themeKey, dark ? 'dark' : 'light');
+            } catch (error) {
+                console.warn('Theme preference could not be saved.', error);
+            }
+            updateButton();
+        });
+    }
+
+    function initAuthentication() {
+        const dialog = document.getElementById('auth-dialog');
+        const form = document.getElementById('auth-form');
+        const openButton = document.getElementById('auth-open');
+        const closeButton = document.getElementById('auth-close');
+        const signOutButton = document.getElementById('sign-out');
+        const greeting = document.getElementById('user-greeting');
+        if (!dialog || !form) return;
+
+        function readAccount() {
+            try {
+                const account = JSON.parse(localStorage.getItem(accountKey) || 'null');
+                return account && typeof account.name === 'string' && typeof account.email === 'string' ? account : null;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function renderAccount() {
+            const account = readAccount();
+            openButton.hidden = Boolean(account);
+            greeting.hidden = !account;
+            signOutButton.hidden = !account;
+            greeting.textContent = account ? 'Hello, ' + account.name : '';
+        }
+
+        openButton.addEventListener('click', function () {
+            form.reset();
+            document.getElementById('auth-feedback').textContent = '';
+            dialog.showModal();
+        });
+        closeButton.addEventListener('click', function () { dialog.close(); });
+        dialog.addEventListener('click', function (event) {
+            if (event.target === dialog) dialog.close();
+        });
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            if (!form.reportValidity()) return;
+            const name = document.getElementById('auth-name').value.trim();
+            const email = document.getElementById('auth-email').value.trim();
+            const password = document.getElementById('auth-password').value;
+            if (name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password.length < 8) {
+                document.getElementById('auth-feedback').textContent = 'Please enter a valid name, email address and password with at least 8 characters.';
+                return;
+            }
+            try {
+                localStorage.setItem(accountKey, JSON.stringify({ name, email, signedIn: true }));
+                renderAccount();
+                dialog.close();
+            } catch (error) {
+                document.getElementById('auth-feedback').textContent = 'Sign in could not be saved in this browser.';
+            }
+        });
+        signOutButton.addEventListener('click', function () {
+            localStorage.removeItem(accountKey);
+            renderAccount();
+        });
+        renderAccount();
+    }
+
+    function initFaq() {
+        if (!window.jQuery) return;
+        $('.faq-question').on('click', function () {
+            const question = $(this);
+            const answer = question.next('.faq-answer');
+            answer.stop(true, true).slideToggle(250, function () {
+                const expanded = answer.is(':visible');
+                question.attr('aria-expanded', String(expanded));
+                question.find('.faq-indicator').text(expanded ? '−' : '+');
+            });
+        });
+    }
+
+    function initPublicApi() {
+        const input = document.getElementById('api-search-input');
+        const button = document.getElementById('api-search-button');
+        const results = document.getElementById('api-results');
+        const status = document.getElementById('api-status');
+        if (!input || !button || !results || !status) return;
+
+        async function searchProducts() {
+            const query = input.value.trim();
+            if (!query) {
+                status.textContent = 'Enter a product name to search.';
+                results.replaceChildren();
+                return;
+            }
+            button.disabled = true;
+            status.textContent = 'Searching Open Food Facts...';
+            results.replaceChildren();
+            try {
+                const endpoint = 'https://world.openfoodfacts.org/cgi/search.pl?search_terms=' +
+                    encodeURIComponent(query) + '&search_simple=1&action=process&json=1&page_size=8&fields=product_name,brands,image_front_small_url,quantity,categories,code';
+                const response = await fetch(endpoint, { headers: { Accept: 'application/json' } });
+                if (!response.ok) throw new Error('The product database returned an error (' + response.status + ').');
+                const data = await response.json();
+                if (!Array.isArray(data.products) || data.products.length === 0) {
+                    status.textContent = 'No products found. Try another search term.';
+                    return;
+                }
+                data.products.forEach(function (product) {
+                    const name = product.product_name || 'Unnamed product';
+                    const card = document.createElement('article');
+                    card.className = 'api-product';
+                    if (product.image_front_small_url) {
+                        const image = document.createElement('img');
+                        image.src = product.image_front_small_url;
+                        image.alt = name;
+                        image.loading = 'lazy';
+                        card.append(image);
+                    }
+                    const heading = document.createElement('h3');
+                    heading.textContent = name;
+                    const brand = document.createElement('p');
+                    brand.textContent = 'Brand: ' + (product.brands || 'Not specified');
+                    const quantity = document.createElement('p');
+                    quantity.textContent = 'Quantity: ' + (product.quantity || 'Not specified');
+                    const category = document.createElement('p');
+                    category.textContent = 'Category: ' + (product.categories || 'Not specified');
+                    card.append(heading, brand, quantity, category);
+                    
+if (product.code && /^\d+$/.test(product.code)) {
+    const link = document.createElement('a');
+
+    link.href = 'https://world.openfoodfacts.org/product/' +
+        encodeURIComponent(product.code);
+
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = 'View product details';
+
+    card.append(link);
+}
+
+                    results.append(card);
+                });
+                status.textContent = 'Showing ' + results.children.length + ' product results from Open Food Facts.';
+            } catch (error) {
+                status.textContent = 'Unable to load products right now. Check your connection and try again.';
+                console.error(error);
+            } finally {
+                button.disabled = false;
+            }
+        }
+
+        button.addEventListener('click', searchProducts);
+        input.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') searchProducts();
+        });
+        searchProducts();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        initTheme();
+        initAuthentication();
+        initFaq();
+        initPublicApi();
+    });
+})();

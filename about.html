@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bean & Brew coffee shop website with coffee menu, desserts, gallery and contact information.">
 
     <title>About Us - Bean & Brew</title>
 
@@ -11,224 +13,227 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link href="vendor/bootstrap.min.css" rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header class="site-header">
-    <div class="container header-container">
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                Bean<span>&</span>Brew
+            </a>
 
-        <a href="index.html" class="logo">
-            Bean<span>&</span>Brew
-        </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="menu.html">Menu</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </nav>
 
-        <nav class="main-nav">
-            <a href="index.html">Home</a>
-            <a href="about.html" class="active">About</a>
-            <a href="menu.html">Menu</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-
-    </div>
-</header>
-
-
-<main>
-
-    <section class="page-banner">
-        <div class="container text-center">
-            <span class="small-title">OUR STORY</span>
-            <h1>About Bean & Brew</h1>
-            <p>
-                A small coffee shop built around great coffee
-                and meaningful moments.
-            </p>
+            <div class="site-actions">
+                <button type="button" class="utility-button" id="theme-toggle" aria-label="Switch color theme">🌙 Dark mode</button>
+                <button type="button" class="utility-button" id="auth-open">Sign In</button>
+                <span id="user-greeting" aria-live="polite" hidden></span>
+                <button type="button" class="utility-button" id="sign-out" hidden>Sign Out</button>
+            </div>
         </div>
-    </section>
+    </header>
 
+    <dialog id="auth-dialog" class="auth-dialog" aria-labelledby="auth-title">
+        <form id="auth-form" class="auth-form">
+            <button type="button" class="dialog-close" id="auth-close" aria-label="Close sign in">×</button>
 
-    <section class="section">
-        <div class="container">
+            <h2 id="auth-title">Sign in to Bean & Brew</h2>
+            <p>Enter your name and email to personalize this demo website.</p>
 
-            <div class="row align-items-center g-5">
+            <label for="auth-name">Your name</label>
+            <input id="auth-name" name="name" type="text" autocomplete="name" required minlength="2">
 
-                <div class="col-12 col-md-6">
-                    <img
-                        src="images/beans.jpg"
-                        alt="Coffee beans"
-                        class="large-image"
-                        loading="lazy"
-                    >
+            <label for="auth-email">Email address</label>
+            <input id="auth-email" name="email" type="email" autocomplete="email" required>
+
+            <label for="auth-password">Password</label>
+            <input id="auth-password" name="password" type="password" autocomplete="current-password" minlength="8" required>
+
+            <p class="auth-note">Demo sign-in only. Your password is checked in the form and is never saved.</p>
+            <p id="auth-feedback" class="form-summary" role="status"></p>
+
+            <button type="submit" class="primary-button">Sign In</button>
+        </form>
+    </dialog>
+
+    <main>
+        <section class="page-banner">
+            <div class="container text-center">
+                <span class="small-title">OUR STORY</span>
+                <h1>About Bean & Brew</h1>
+                <p>
+                    A small coffee shop built around great coffee
+                    and meaningful moments.
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-12 col-md-6">
+                        <img
+                            src="images/beans.jpg"
+                            alt="Coffee beans"
+                            class="large-image"
+                            loading="lazy"
+                        >
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <span class="small-title">OUR STORY</span>
+                        <h2>Made with Passion</h2>
+
+                        <p>
+                            Bean & Brew started with a simple idea:
+                            create a comfortable place where people
+                            can enjoy high-quality coffee.
+                        </p>
+
+                        <p>
+                            Our baristas carefully prepare every cup
+                            using fresh coffee beans and quality ingredients.
+                        </p>
+
+                        <p>
+                            Whether you come here to study, work or meet
+                            your friends, we want you to feel at home.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="container">
+                <div class="section-heading text-center">
+                    <span class="small-title">WHY US</span>
+                    <h2>What Makes Us Special?</h2>
                 </div>
 
-                <div class="col-12 col-md-6">
+                <div class="row g-4">
+                    <div class="col-12 col-md-4">
+                        <div class="feature-box">
+                            <div class="feature-number">01</div>
+                            <h3>Fresh Coffee</h3>
+                            <p>
+                                We use carefully selected beans
+                                and prepare every drink fresh.
+                            </p>
+                        </div>
+                    </div>
 
-                    <span class="small-title">OUR STORY</span>
+                    <div class="col-12 col-md-4">
+                        <div class="feature-box">
+                            <div class="feature-number">02</div>
+                            <h3>Cozy Atmosphere</h3>
+                            <p>
+                                Our interior is designed for relaxing,
+                                studying and meeting friends.
+                            </p>
+                        </div>
+                    </div>
 
-                    <h2>Made with Passion</h2>
-
-                    <p>
-                        Bean & Brew started with a simple idea:
-                        create a comfortable place where people
-                        can enjoy high-quality coffee.
-                    </p>
-
-                    <p>
-                        Our baristas carefully prepare every cup
-                        using fresh coffee beans and quality ingredients.
-                    </p>
-
-                    <p>
-                        Whether you come here to study, work or meet
-                        your friends, we want you to feel at home.
-                    </p>
-
+                    <div class="col-12 col-md-4">
+                        <div class="feature-box">
+                            <div class="feature-number">03</div>
+                            <h3>Friendly Service</h3>
+                            <p>
+                                Our team is always happy to help
+                                you choose your perfect drink.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-
             </div>
+        </section>
 
-        </div>
-    </section>
+        <section class="section">
+            <div class="container text-center">
+                <span class="small-title">OUR TEAM</span>
+                <h2>Meet Our Baristas</h2>
 
+                <div class="row g-4 mt-3">
+                    <div class="col-12 col-md-4">
+                        <div class="team-card">
+                            <img
+                                src="images/aikyn.jpg"
+                                alt="Barista"
+                                loading="lazy"
+                            >
+                            <h3>Aikyn</h3>
+                            <p>Head Barista</p>
+                        </div>
+                    </div>
 
-    <section class="features-section">
+                    <div class="col-12 col-md-4">
+                        <div class="team-card">
+                            <img
+                                src="images/erkezhan.jpg"
+                                alt="Barista"
+                                loading="lazy"
+                            >
+                            <h3>Erkezhan</h3>
+                            <p>Coffee Specialist</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="team-card">
+                            <img
+                                src="images/khanzere.jpg"
+                                alt="Barista"
+                                loading="lazy"
+                            >
+                            <h3>Khanzere</h3>
+                            <p>Barista</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
         <div class="container">
-
-            <div class="section-heading text-center">
-                <span class="small-title">WHY US</span>
-                <h2>What Makes Us Special?</h2>
-            </div>
-
             <div class="row g-4">
-
                 <div class="col-12 col-md-4">
-                    <div class="feature-box">
-                        <div class="feature-number">01</div>
-                        <h3>Fresh Coffee</h3>
-                        <p>
-                            We use carefully selected beans
-                            and prepare every drink fresh.
-                        </p>
-                    </div>
+                    <h3>Bean & Brew</h3>
+                    <p>Fresh coffee and good moments every day.</p>
                 </div>
 
                 <div class="col-12 col-md-4">
-                    <div class="feature-box">
-                        <div class="feature-number">02</div>
-                        <h3>Cozy Atmosphere</h3>
-                        <p>
-                            Our interior is designed for relaxing,
-                            studying and meeting friends.
-                        </p>
-                    </div>
+                    <h3>Contact</h3>
+                    <p>Astana, Kazakhstan</p>
+                    <p>+7 707 707 70 70</p>
+                    <p>aikocoffee@beanbrew.com</p>
                 </div>
 
                 <div class="col-12 col-md-4">
-                    <div class="feature-box">
-                        <div class="feature-number">03</div>
-                        <h3>Friendly Service</h3>
-                        <p>
-                            Our team is always happy to help
-                            you choose your perfect drink.
-                        </p>
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <span>Instagram</span>
+                        <span>TikTok</span>
+                        <span>Facebook</span>
                     </div>
                 </div>
-
             </div>
 
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bean & Brew Coffee Shop. All rights reserved.</p>
+                <p class="ai-disclosure">AI assistance was used during development for code support and documentation.</p>
+            </div>
         </div>
-    </section>
+    </footer>
 
-
-    <section class="section">
-        <div class="container text-center">
-
-            <span class="small-title">OUR TEAM</span>
-
-            <h2>Meet Our Baristas</h2>
-
-            <div class="row g-4 mt-3">
-
-                <div class="col-12 col-md-4">
-                    <div class="team-card">
-                        <img
-                            src="images/aikyn.jpg"
-                            alt="Barista"
-                            loading="lazy"
-                        >
-                        <h3>Aikyn</h3>
-                        <p>Head Barista</p>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-4">
-                    <div class="team-card">
-                        <img
-                            src="images/erkezhan.jpg"
-                            alt="Barista"
-                            loading="lazy"
-                        >
-                        <h3>Erkezhan</h3>
-                        <p>Coffee Specialist</p>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-4">
-                    <div class="team-card">
-                        <img
-                            src="images/khanzere.jpg"
-                            alt="Barista"
-                            loading="lazy"
-                        >
-                        <h3>Khanzere</h3>
-                        <p>Barista</p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-</main>
-
-<footer class="site-footer">
-    <div class="container">
-
-        <div class="row g-4">
-
-            <div class="col-12 col-md-4">
-                <h3>Bean & Brew</h3>
-                <p>Fresh coffee and good moments every day.</p>
-            </div>
-
-            <div class="col-12 col-md-4">
-                <h3>Contact</h3>
-                <p>Astana, Kazakhstan</p>
-                <p>+7 707 707 70 70</p>
-                <p>aikocoffee@beanbrew.com</p>
-            </div>
-
-            <div class="col-12 col-md-4">
-                <h3>Follow Us</h3>
-                <div class="social-links">
-                    <span>Instagram</span>
-                    <span>TikTok</span>
-                    <span>Facebook</span>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026 Bean & Brew Coffee Shop. All rights reserved.</p>
-        </div>
-
-    </div>
-</footer>
-
+    <script src="vendor/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
